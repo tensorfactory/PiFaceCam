@@ -28,7 +28,7 @@ PiFaceCam currently consists of 3 components (which collectively known as PiFace
 * Built-in functions to control GPIOs, communicate with JSON-server and sending emails.
 * Expose raw information (image, detected face-ids and face bounding boxes) via UDP socket for unrestricted capability extension.
 
-Note: Please read user guide: [PiFaceCam User Guide V1_0](downloads/PiFaceCam User Guide V1_0.pdf) for more information.
+Note: Please read user guide: [PiFaceCam User Guide V1_1](downloads/PiFaceCam User Guide V1_0.pdf) for more information.
 
 
 **Install:**
@@ -47,6 +47,17 @@ After you have installed all the necessary libraries, copy all the files from ["
 *If you don't want to go through all the trouble of installing everything yourself, we are sharing out SD Card's image file at github as well. Please take note that we are using 16GB SD Card, therefore you will need a large card to flash the image.
 After flashing your SD Card, remember to reclaim the missing disk space by running raspi-config -> Advanced Options -> Expand Filesystem Ensures that all of the SD card storage is available. PiFaceCam_Client's files are placed in "home/pi" folder.*
 
+**Run:**
+
+1) Connect GPIO 19 to LED via a resistor and GPIO 26 to ground via a resistor.
+
+2) $ python3 wrapper_without_UDP_server.py
+
+The LED will start to blink indicating system loading. When successfully loaded and ready, the LED will continuously ON. Connecting GPIO 26 to HIGH will trigger system shutdown.
+
+Note: Follow step 1 in section 5.1 of "userguide" to setup PiFaceCam-Client to auto-start when power ON.
+
+
 
 **(PiFaceCam-IDServer)**
 
@@ -59,6 +70,15 @@ After you have installed all the necessary libraries, copy all the files from ["
 
 *Similarly, all these files are included in the SD Card image file that we are sharing out at github. PiFaceCam_IDServer's files are placed in "home/pi" folder.*
 
+**Run:**
+
+1) Connect GPIO 19 to LED via a resistor and GPIO 26 to ground via a resistor.
+
+2) $ python3 wrapper.py
+
+The LED will start to blink indicating system loading. When successfully loaded and ready, the LED will continuously ON. Connecting GPIO 26 to HIGH will trigger system shutdown.
+
+Note: Follow step 1 in section 5.1 of "userguide" to setup PiFaceCam-IDServer to auto-start when power ON.
 
 **(PiFaceCam-App)**
 
