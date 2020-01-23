@@ -145,6 +145,7 @@ void loop(){
           digitalWrite(GPIO_OUTPUT_1_PIN, HIGH);
           gpio_1_end_time_ms = millis() + GPIO_OUTOUT_1_ON_DURATION_MS;
           gpio_1_is_ON = true;
+          Serial.println("GPIO_OUTPUT_1 trigger by key value: " + String(key_value) + " GPIO_OUTPUT_1_TRIGGER_KEYVALUE: " + String(GPIO_OUTPUT_1_TRIGGER_KEYVALUE));
         }
 
         // Trigger GPIO_OUTPUT_2 ON
@@ -158,24 +159,9 @@ void loop(){
         // Trigger GPIO_OUTPUT_BUZZER ON
         if (key_value == GPIO_OUTPUT_BUZZER_TRIGGER_KEYVALUE){
           tone(GPIO_OUTPUT_BUZZER_PIN, BUZZER_FREQ, GPIO_OUTOUT_BUZZER_ON_DURATION_MS);
+          Serial.println("Buzzer trigger by key value: " + String(key_value) + " GPIO_OUTPUT_BUZZER_TRIGGER_KEYVALUE: " + String(GPIO_OUTPUT_BUZZER_TRIGGER_KEYVALUE));
         }
 
-        // Trigger GPIO_OUTPUT_1 OFF
-        if (gpio_1_is_ON){
-          if (millis() > gpio_1_end_time_ms){
-            digitalWrite(GPIO_OUTPUT_1_PIN, LOW);
-            gpio_1_is_ON = false;
-          }
-        }
-
-
-        // Trigger GPIO_OUTPUT_2 OFF
-        if (gpio_2_is_ON){
-          if (millis() > gpio_2_end_time_ms){
-            digitalWrite(GPIO_OUTPUT_2_PIN, LOW);
-            gpio_2_is_ON = false;
-          }
-        }
 
         // Clear lcd
         lcd.clear();
@@ -252,6 +238,25 @@ void loop(){
     Serial.println("Client disconnected.");
     Serial.println("");
   }
+
+
+  // Trigger GPIO_OUTPUT_1 OFF
+  if (gpio_1_is_ON){
+    if (millis() > gpio_1_end_time_ms){
+      digitalWrite(GPIO_OUTPUT_1_PIN, LOW);
+      gpio_1_is_ON = false;
+      Serial.println("GPIO_OUTPUT_1 trigger OFF");
+    }
+  }
+
+  // Trigger GPIO_OUTPUT_2 OFF
+  if (gpio_2_is_ON){
+    if (millis() > gpio_2_end_time_ms){
+      digitalWrite(GPIO_OUTPUT_2_PIN, LOW);
+      gpio_2_is_ON = false;
+    }
+  }
+
 }
 
 void print_string_to_serial(const char *str){
