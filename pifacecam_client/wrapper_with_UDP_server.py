@@ -1,4 +1,4 @@
-import PiFaceCam_Client_1_3_0
+import PiFaceCam_Client_1_3_5
 import multiprocessing as mp
 import socket
 from struct import unpack
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     UDP_server_process = mp.Process(target=UDP_server, args=(60000,))
 
     UDP_server_process.start()
-    PiFaceCam_Client_1_3_0.run_client("localhost", port)
+    PiFaceCam_Client_1_3_5.run_client("localhost", port)
     os.system("sudo shutdown -h now")
