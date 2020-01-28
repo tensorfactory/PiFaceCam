@@ -1,5 +1,5 @@
 **Downloads:**
-* Complete user guide: [PiFaceCam User Guide V1_1](downloads/PiFaceCam User Guide V1_1.pdf)
+* Complete user guide: [PiFaceCam User Guide V1_2](downloads/PiFaceCam User Guide V1_2.pdf)
 * PiFaceCam-App Community (Free from Google Play):
 * Image of SD Card (Raspbian Buster desktop + necessary libraries + PiFaceCam-IDServer + PiFaceCam-Client):
 
@@ -8,7 +8,7 @@
 ### Facial Recognition for Raspberry Pi
 
 #### Overview
-PiFaceCam system uses deep neural network for accurate facial recognition. It is designed to run efficiently in Raspberry Pi (tested in Pi3 Model B+ and Pi4 Model B 4GB).
+PiFaceCam system uses deep neural network for accurate facial recognition. It is designed to run efficiently in Raspberry Pi (tested in Pi3 Model B+ and Pi4 Model B 4GB) at 10~11FPS (based on single face and running on Pi4 B).
 PiFaceCam currently consists of 3 components (which collectively known as PiFaceCam system). 
 1. PiFaceCam-Client: Runs in Raspberry Pi with camera attached. It performs facial recognition, carries out instructions as per the uploaded program and also capable to conveys data to other components.
 2. PiFaceCam-IDServer (Optional):  Runs in Raspberry Pi. It allows synchronization for face ids among multiple PiFaceCam-Clients (More will be explained at the implementation section).
@@ -28,7 +28,7 @@ PiFaceCam currently consists of 3 components (which collectively known as PiFace
 * Built-in functions to control GPIOs, communicate with JSON-server and sending emails.
 * Expose raw information (image, detected face-ids and face bounding boxes) via UDP socket for unrestricted capability extension.
 
-Note: Please read user guide: [PiFaceCam User Guide V1_1](downloads/PiFaceCam User Guide V1_0.pdf) for more information.
+Note: Please read user guide: [PiFaceCam User Guide V1_2](downloads/PiFaceCam User Guide V1_2.pdf) for more information.
 
 
 **Install:**
