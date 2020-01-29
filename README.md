@@ -1,7 +1,7 @@
 **Downloads:**
-* Complete user guide: [https://github.com/tensorfactory/PiFaceCam/tree/master/downloads]
-* PiFaceCam-App Community (Free from Google Play):
-* Image of SD Card (Raspbian Buster desktop + necessary libraries + PiFaceCam-IDServer + PiFaceCam-Client):[https://github.com/tensorfactory/PiFaceCam/tree/master/downloads]
+* Complete user guide:[PiFaceCam User Guide V1_3.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads)
+* PiFaceCam-App Community (Free from Google Play):[PiFaceCam Application](https://play.google.com/store/apps/details?id=com.tensorfactory.pifacecamcommunity)
+* Image of SD Card (Raspbian Buster desktop + necessary libraries + PiFaceCam-IDServer + PiFaceCam-Client):[2019-09-26 buster with base libraries and pifacecam 1.3.11.img.7z](https://drive.google.com/drive/folders/17RT4cYmYMQs3T3JijVTyo2ctESoDOa-v?usp=sharing)
 
 ![alt text](images/Overview.png)
 ## PiFaceCam
@@ -28,7 +28,7 @@ PiFaceCam currently consists of 3 components (which collectively known as PiFace
 * Built-in functions to control GPIOs, communicate with JSON-server and sending emails.
 * Expose raw information (image, detected face-ids and face bounding boxes) via UDP socket for unrestricted capability extension.
 
-Note: Please read user guide: [PiFaceCam User Guide V1_2](downloads/PiFaceCam User Guide V1_2.pdf) for more information.
+Note: Please read user guide: [PiFaceCam User Guide V1_3.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads) for more information.
 
 
 **Install:**
