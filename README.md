@@ -1,7 +1,7 @@
 **Downloads:**
-* Complete user guide: [PiFaceCam User Guide V1_2](downloads/PiFaceCam User Guide V1_2.pdf)
+* Complete user guide: [https://github.com/tensorfactory/PiFaceCam/tree/master/downloads]
 * PiFaceCam-App Community (Free from Google Play):
-* Image of SD Card (Raspbian Buster desktop + necessary libraries + PiFaceCam-IDServer + PiFaceCam-Client):
+* Image of SD Card (Raspbian Buster desktop + necessary libraries + PiFaceCam-IDServer + PiFaceCam-Client):[https://github.com/tensorfactory/PiFaceCam/tree/master/downloads]
 
 ![alt text](images/Overview.png)
 ## PiFaceCam
