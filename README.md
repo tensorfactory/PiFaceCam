@@ -1,5 +1,5 @@
 **Downloads:**
-* Complete user guide:[PiFaceCam User Guide V2_2.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads)
+* Complete user guide:[PiFaceCam User Guide.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads)
 * PiFaceCam-App Community (Free from Google Play):[PiFaceCam Community](https://play.google.com/store/apps/details?id=com.tensorfactory.pifacecamcommunity)
 * * PiFaceCam-App Professional (Purchase from Google Play):[PiFaceCam Professional](https://play.google.com/store/apps/details?id=com.tensorfactory.pifacecamprofessional)
 * Image of SD Card (Raspbian Buster desktop + necessary libraries):[2020-02-13 buster with base libraries for pifacecam.7z](https://drive.google.com/open?id=1SMEC0KdPjZMuGqKpISzrndNxZqUjkP63)
@@ -25,7 +25,7 @@ PiFaceCam system uses deep neural network for high accuracy facial recognition. 
 * Built-in functions to control GPIOs, communicate with JSON-server and sending out emails.
 
 
-Note: Please read user guide: [PiFaceCam User Guide V2_2.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads) for more information.
+Note: Please read user guide: [PiFaceCam User Guide.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads) for more information.
 
 
 **Install:**
@@ -74,4 +74,4 @@ There are 2 versions of PiFaceCam_App, PiFaceCam (Community) and PiFaceCam (Prof
 | Enabling face verification server mode. | No            | Yes          |
 
 
-Note: Please read user guide: [PiFaceCam User Guide V2_2.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads) for more information.
+Note: Please read user guide: [PiFaceCam User Guide.pdf](https://github.com/tensorfactory/PiFaceCam/tree/master/downloads) for more information.
