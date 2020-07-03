@@ -64,7 +64,8 @@ The run() function can receive many parameters. Details of each parameter are li
 
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
-|faceids_images_root_folder_pathname|String|None|path to where images of each id is stored.|
+|faceids_images_root_folder_pathname|String|None|path to where images of each id are stored.|
+|device_id|String|CAM001|Name of device. Will be displayed at the bottom left of video screen.| 
 
 
 
