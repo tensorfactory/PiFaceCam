@@ -57,7 +57,7 @@ You should see something like the following print out.<br/>
 ```
 
 The status LED will blinks during system loading and turn ON continuously when system is ready. Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` you should able to view the camera feeds with some facial recognition information.
-
+<br/>
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ The run() function can receive many parameters. Description of each parameter ar
 |verification_server_token|String|None|If set, will use to validate client's request.|
 |usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
 |picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
-
+<br/>
 
 **Details:**
 
