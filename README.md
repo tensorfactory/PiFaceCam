@@ -98,7 +98,7 @@ The run() function can receive many parameters. Description of each parameter ar
 
 **Details:**
 
-[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should complete before the next frame arrives or else the next frame will be ignored. An example of a callback function is as below.<br\>
+[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should complete before the next frame arrives or else the next frame will be ignored. Below is an example of callback function.
 ```
 def example_callback_function(data_dict):
     returned_image_np  = data_dict["image"]
