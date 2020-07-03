@@ -65,6 +65,7 @@ The run() function can receive many parameters. Description of each parameter ar
 
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
+|callback_function|Function|None|[1]Callback function to retrieve facial recognition data and perform post recognition activities.| 
 |faceids_folder_pathname|String|None|Path to where images of each id are stored.| 
 |device_id|String|"CAM001"|Name of device. Will be displayed at the bottom left of video screen.Maximum length allowed is 10 characters.| 
 |cam_setup|String|"MONO_PICAM"|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
