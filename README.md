@@ -98,4 +98,32 @@ The run() function can receive many parameters. Description of each parameter ar
 
 **Details:**
 
-[1]The run() function can receive many parameters. Details of each parameter are listed below.<br/>
+[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should complete before the next frame arrives or else the next frame will be ignored. An example of a callback function is as below.<br\>
+```
+def example_callback_function(data_dict):
+    returned_image_np  = data_dict["image"]
+    returned_faceID_list = data_dict["face_id_list"]
+    returned_face_confidence_percentage_list= data_dict["face_confidence_percentage_list"]
+    returned_face_is_dimensional_check_passed_list = data_dict["face_is_dimensional_check_passed_list"]
+    returned_face_is_masked_list = data_dict["face_is_masked_list"]
+    returned_face_abs_minXminYmaxXmaxY_list = data_dict["face_bbox_minXminYmaxXmaxY_list"]
+
+    no_of_faces_passed_dimensional_check = 0
+    for this_face_is_dimensional_check_passed in returned_face_is_dimensional_check_passed_list:
+        if this_face_is_dimensional_check_passed:
+            no_of_faces_passed_dimensional_check += 1
+
+    print("Returned image shape :", returned_image_np.shape)
+    print("No of face detected :", len(returned_faceID_list))
+    print("No of faces passed dimensional check :", no_of_faces_passed_dimensional_check)
+
+    for face_idx in range(len(returned_faceID_list)):
+        print("This face id :", returned_faceID_list[face_idx])
+        print("This face confidence percentage :", returned_face_confidence_percentage_list[face_idx])
+        print("This face's mouth is covered :", returned_face_is_masked_list[face_idx])
+        print("This face's bbox minXminYmaxXmaxY :", returned_face_abs_minXminYmaxXmaxY_list[face_idx])
+
+    # Perform post recognition task here....
+
+```
+
