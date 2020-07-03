@@ -94,7 +94,7 @@ The run() function can receive many parameters. Description of each parameter ar
 |verification_server_token|String|None|If set, will use to validate client's request.|
 |usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
 |picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
-<br/>
+<br/><br/>
 
 **Details:**
 
