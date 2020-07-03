@@ -64,9 +64,9 @@ The run() function can receive many parameters. Details of each parameter are li
 
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
-|faceids_images_root_folder_pathname|String|None|path to where images of each id are stored.|
-|device_id|String|CAM001|Name of device. Will be displayed at the bottom left of video screen.| 
-
+|faceids_images_root_folder_pathname|String|None|path to where images of each id are stored.| 
+|device_id|String|"CAM001"|Name of device. Will be displayed at the bottom left of video screen.Maximum length allowed is 10 characters.| 
+|cam_setup|String|MONO_PICAM|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
 
 
 
