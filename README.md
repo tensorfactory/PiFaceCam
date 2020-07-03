@@ -74,8 +74,21 @@ The run() function can receive many parameters. Details of each parameter are li
 |shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num|
 |full_face_only|Boolean|False|When set to true, will force pifacecam to use whole face for recognition.|
 |eyes_only|Boolean|False|When set to true, will force pifacecam to focus on the eyes area for recognition.|
-|high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton. This will however limit the number of face for recognition to one (instead of six in the standard mode). Only the mode prominent face will be recognised. When is ON, there will be a (HP) word show beside the device id.|
-
-
-
-
+|high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton. This will however limit the number of face for recognition to one (instead of six in the standard mode). Only the most prominent face will be recognised.|
+|show_bbox|Boolean|True|Whether to show bounding boxes around detected faces during video streaming.|
+|show_faceid|Boolean|True|Display the person's id below each identified face during video streaming.|
+|show_camid|Boolean|True|Display the device's id during video streaming.|
+|show_fps|Boolean|True|Whether to display the frames per second during video streaming.|
+|show_measurements|Boolean|True|For stereo cameras setting only. Display the delta face angle, delta bbox dimensions between left and right cameras during video streaming.|
+|show_positioning_guides|Boolean|False|Display the window borders and min/max detectable face size during video streaming.|
+|show_conf_percentage|Boolean|True|Display the recognition confidence percentage above each identified face during video streaming.|
+|show_precision_mode|Boolean|True|Display the word "HP" beside the device id if high precision mode is ON or "STD" if OFF.|
+|stereo_max_delta_bbox_w_percent|Int/Float|50|For stereo cameras setting only. Max delta percentage between left and right camera bbox width. Value has to be between 0 and 100|
+|stereo_max_delta_bbox_h_percent|Int/Float|50|For stereo cameras setting only. Max delta percentage between left and right camera bbox height. Value has to be between 0 and 100|
+|stereo_min_delta_face_angle|Int/Float|20|For stereo cameras setting only. Min delta percentage between left and right face angle. Value has to be between 0 and 100, and smaller than stereo_max_delta_face_angle|
+|stereo_max_delta_face_angle|Int/Float|60|For stereo cameras setting only. Max delta percentage between left and right face angle. Value has to be between 0 and 100, and larger than stereo_min_delta_face_angle|
+|in_verification_server_mode|Boolean|False|Run as facial verification server.|
+|verification_server_port_no|Int|9990|Port number of verification server.|
+|verification_server_token|String|None|If set, will use to validate client's request.|
+|usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
+|picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
