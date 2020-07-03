@@ -60,7 +60,8 @@ The status LED will blinks during system loading and turn ON continuously when s
 
 
 **Parameters:**
-The run() function can receive many parameters. Details of each parameter are listed below.<br/>
+
+The run() function can receive many parameters. Description of each parameter are listed below.<br/>
 
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
@@ -92,3 +93,8 @@ The run() function can receive many parameters. Details of each parameter are li
 |verification_server_token|String|None|If set, will use to validate client's request.|
 |usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
 |picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
+
+
+**Details:**
+
+[1]The run() function can receive many parameters. Details of each parameter are listed below.<br/>
