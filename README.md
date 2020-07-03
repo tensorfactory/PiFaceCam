@@ -66,9 +66,15 @@ The run() function can receive many parameters. Details of each parameter are li
 |:--:|:--|:--|:--|
 |faceids_folder_pathname|String|None|Path to where images of each id are stored.| 
 |device_id|String|"CAM001"|Name of device. Will be displayed at the bottom left of video screen.Maximum length allowed is 10 characters.| 
-|cam_setup|String|MONO_PICAM|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
-
-
+|cam_setup|String|"MONO_PICAM"|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
+|stereo_left_cam_type|String|"USB"|Left camera type for stereo setup. Available options are  "PICAM" and "USB".|
+|stereo_right_cam_type|String|"PICAM"|Right camera type for stereo setup. Available options are  "PICAM" and "USB".|
+|detect_conf_percent|Int/Float|99.9|Minimum confident percentage required to identify a person.|
+|status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 and different from shutdown_pin_num|
+|shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num|
+|full_face_only|Boolean|False|When set to true, will force pifacecam to use whole face for recognition.|
+|eyes_only|Boolean|False|When set to true, will force pifacecam to focus on the eyes area for recognition.|
+|high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton. This will however limit the number of face for recognition to one (instead of six in the standard mode). Only the mode prominent face will be recognised. When is ON, there will be a (HP) word show beside the device id.|
 
 
 
