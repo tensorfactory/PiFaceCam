@@ -99,7 +99,7 @@ The run() function can receive many parameters. Description of each parameter ar
 **Details:**
 
 [1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
-|Key||Description|
+|Key|Description|
 |:--:|:--|
 |"image"|BGR image in uint8 numpy array format (HeightxWidthxDepth).|
 |"face_id_list"|List of face ids. For faces that not meeting the "detect_conf_percent" will be identified as "UNREGISTERED".|
