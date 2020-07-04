@@ -98,7 +98,17 @@ The run() function can receive many parameters. Description of each parameter ar
 
 **Details:**
 
-[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should complete before the next frame arrives or else the next frame will be ignored. Below is an example of callback function.
+[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
+|Key||Description|
+|:--:|:--|
+|"image"|BGR image in uint8 numpy array format (HeightxWidthxDepth).|
+|"face_id_list"|List of face ids. For faces that not meeting the "detect_conf_percent" will be identified as "UNREGISTERED".|
+|"face_confidence_percentage_list"|List of confidence percentage for all detected faces.|
+|"face_is_dimensional_check_passed_list"|List of booleans indicating if the face passed dimensional check.|
+|"face_is_masked_list"|List of booleans indicating if mouth is covered (face-mask for example).|
+|"face_bbox_minXminYmaxXmaxY_list"|List of bounding box "left, top, right, bottom" coordinates for each detected face.|
+
+Below is an example of callback function.
 ```
 def example_callback_function(data_dict):
     returned_image_np  = data_dict["image"]
