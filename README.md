@@ -89,9 +89,9 @@ The run() function can receive many parameters. Description of each parameter ar
 |stereo_max_delta_bbox_h_percent|Int/Float|50|[4]For stereo cameras setting only. Max delta percentage between left and right camera bbox height. Value has to be between 0 and 100|
 |stereo_min_delta_face_angle|Int/Float|20|[5]For stereo cameras setting only. Min delta percentage between left and right face angle. Value has to be between 0 and 100, and smaller than stereo_max_delta_face_angle|
 |stereo_max_delta_face_angle|Int/Float|60|[5]For stereo cameras setting only. Max delta percentage between left and right face angle. Value has to be between 0 and 100, and larger than stereo_min_delta_face_angle|
-|in_verification_server_mode|Boolean|False|Run as facial verification server.|
-|verification_server_port_no|Int|9990|Port number of verification server.|
-|verification_server_token|String|None|If set, will use to validate client's request.|
+|in_verification_server_mode|Boolean|False|[6]Run as facial verification server.|
+|verification_server_port_no|Int|9990|[6]Port number of verification server.|
+|verification_server_token|String|None|[6]If set, will use to validate client's request.|
 |usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
 |picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
 <br/>
@@ -150,8 +150,38 @@ imagefolder
     └── image01.jpg
 ```
 **[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/>
-**[4] stereo_max_delta_bbox_w_percent/stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
-**[5] stereo_min_delta_face_angle/stereo_min_delta_face_angle:** 
+**[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
+**[5] stereo_min_delta_face_angle/ stereo_min_delta_face_angle:** 
 ![Stereo cameras layout](https://github.com/tensorfactory/PiFaceCam/blob/master/images/stereo_cameras_layout.JPG)
 To defense against attack using photo, you can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -α & β. The difference of these angles (β – (-α) = β + α) should be about the same as the angle between the left and right camera.
-For this example, the left and right cameras were placed 40˚ apart, β – (-α) will be close to 40˚. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and β – (-α) will be close to 0˚. We can set a minimum and maximum acceptable face angle (β + α). Both values should be between 0˚ and 100˚.
+For this example, the left and right cameras were placed 40˚ apart, β – (-α) will be close to 40˚. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and β – (-α) will be close to 0˚. We can set a minimum and maximum acceptable face angle (β + α). Both values should be between 0˚ and 100˚.<br/>
+**[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
+Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. To request for verification, the client needs to send the reference image, the token, and a boolean indicating if a returned image is required, in JSON format to server.
+|Element|Key|Value|
+|:--|:--:|:--:|
+|Token|"token"|String|
+|Image|"image"|Reference image (base64 string)|
+|If need to return image|"need_return_image"|Boolean|
+The image bytes have to be converted to base64 string (see below example). The length of this JSON bytes needs to be included at the beginning of the packet when send to verification server. The length value is encoded in a big-endian ordering 4 bytes.
+```
+# --------Load image bytes from file-------- 
+img_filestream = open(image_file_pathname, "rb") 
+ori_image_bytes = img_filestream.read() 
+img_filestream.close() 
+
+# --------Convert to base64 string-------- 
+ori_image_base64 = base64.b64encode(ori_image_bytes) 
+ori_image_base64_str = ori_image_base64.decode('utf-8') 
+
+# --------Compose JSON packet----------- 
+JSON_dict = {"token": server_token, 
+             "image": ori_image_base64_str, 
+			 "need_return_image": need_return_image} 
+JSON_str = json.dumps(JSON_dict) 
+
+# --------Convert to binary string and add length of packet------------ 
+JSON_bytes = JSON_str.encode("utf-8") 
+len_of_packet = len(JSON_bytes) 
+len_of_packet_bytes = pack('>I', len_of_packet)
+```
+<br/>
