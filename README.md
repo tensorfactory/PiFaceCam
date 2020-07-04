@@ -156,7 +156,9 @@ imagefolder
 To defense against attack using photo, you can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -α & β. The difference of these angles (β – (-α) = β + α) should be about the same as the angle between the left and right camera.
 For this example, the left and right cameras were placed 40˚ apart, β – (-α) will be close to 40˚. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and β – (-α) will be close to 0˚. We can set a minimum and maximum acceptable face angle (β + α). Both values should be between 0˚ and 100˚.<br/>
 **[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
-Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. To request for verification, the client needs to send the reference image, the token, and a boolean indicating if a returned image is required, in JSON format to server.
+Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. 
+***Information to server***
+To request for verification, the client needs to send the reference image, the token, and a boolean indicating if a returned image is required, in JSON format to server.
 |Element|Key|Value|
 |:--|:--:|:--:|
 |Token|"token"|String|
@@ -177,12 +179,18 @@ ori_image_base64_str = ori_image_base64.decode('utf-8')
 # --------Compose JSON packet----------- 
 JSON_dict = {"token": server_token, 
              "image": ori_image_base64_str, 
-			 "need_return_image": need_return_image} 
+             "need_return_image": need_return_image} 
 JSON_str = json.dumps(JSON_dict) 
 
 # --------Convert to binary string and add length of packet------------ 
 JSON_bytes = JSON_str.encode("utf-8") 
 len_of_packet = len(JSON_bytes) 
 len_of_packet_bytes = pack('>I', len_of_packet)
+
+# ------------Send packet to verification server---------------- 
+server_address = (server_ipaddress, server_port) 
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+sock.connect(server_address) 
+sock.sendall(total_bytes)
 ```
 <br/>
