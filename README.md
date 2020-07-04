@@ -266,5 +266,6 @@ if isSuccessful:
 else: 
 	print("Server return error message :" + received_data_JSON_obj.get("errMessage"))
 ```
-<br/>
-***Guidelines for preparing reference image.***<br/>
+
+***Guidelines for preparing reference image.***
+![Face guidelines](https://github.com/tensorfactory/PiFaceCam/blob/master/images/face_guidelines.JPG)
