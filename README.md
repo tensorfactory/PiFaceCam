@@ -151,4 +151,5 @@ imagefolder
 ```
 **[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/>
 **[4] stereo_max_delta_bbox_w_percent/stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
-**[5] stereo_min_delta_face_angle/stereo_min_delta_face_angle:** 
+**[5] stereo_min_delta_face_angle/stereo_min_delta_face_angle:** In 
+[Stereo cameras layout](https://github.com/tensorfactory/PiFaceCam/blob/master/images/stereo_cameras_layout.JPG)
