@@ -194,3 +194,76 @@ sock.connect(server_address)
 sock.sendall(total_bytes)
 ```
 <br/>
+***Information returned from server***<br/>
+Returned JSON object from verification server to client.
+|Key|Value|
+|:--|:--|
+|"isSuccessful"|True / False|
+|"errMessage"|Error message if isSuccessful is False|
+|"noOfFaces"|Number of faces detected. Only faces that passed the dimensional constrain check.|
+|"imageWidth"|Width of the image from verification server.|
+|"imageHeight"|Height of the image from verification server.|
+|"faces"|List of faces detected. Only faces that passed the dimensional constrain check.|
+|"returnImage"|Returned image (base64 string)|
+<br/>
+***Faces list.***<br/>
+|Key|Value|
+|:--|:--|
+|"top"|Top y-coordinate of face bounding box.|
+|"left"|Left x-coordinate of face bounding box.|
+|"width"|Width of face bounding box.|
+|"height"|Height of face bounding box.|
+|"confPercentage"|Confidence level (%) of face matches image sent.|
+<br/>
+Similarly, the first 4 bytes of the returned packet indicates the length of packet.
+```
+# -------------Receive reply from server----------------- 
+len_of_packet_bytes = sock.recv(4) 
+len_of_packet_int = unpack('>I', len_of_packet_bytes)[0] 
+received_data = b'' 
+while len(received_data) < len_of_packet_int: 
+    packet = sock.recv(len_of_packet_int - len(received_data)) 
+	if not packet: 
+	    break 
+	received_data += packet sock.close() 
+
+#------------Decode received binary string to JSON object--------- 
+received_data_string = received_data.decode("utf-8")
+received_data_JSON_obj = json.loads(received_data_string) 
+
+# -------------Retrieve verification results--------------- 
+isSuccessful = received_data_JSON_obj.get("isSuccessful") 
+if isSuccessful: 
+    noOfFaces = received_data_JSON_obj.get("noOfFaces") 
+	imageWidth = received_data_JSON_obj.get("imageWidth") 
+	imageHeight = received_data_JSON_obj.get("imageHeight") 
+	
+	if noOfFaces > 0: 
+	    faces = received_data_JSON_obj.get("faces") 
+		for face_idx, face in enumerate(faces): 
+		    face_top = face["top"] 
+			face_left = face["left"] 
+			face_width = face["width"] 
+			face_height = face["height"] 
+			confPercentage = face["confPercentage"] 
+			
+			print("Face {}: confident {:.2f}%".format(face_idx, confPercentage)) 
+	else: 
+	    print("No face detected.") 
+		
+	if need_return_image: 
+	    returned_image_base64_str = received_data_JSON_obj.get("returnImage")
+		returned_image_base64 = returned_image_base64_str.encode("utf-8")
+		returned_image_bytes = base64.b64decode(returned_image_base64)
+		returned_image_array = np.frombuffer(returned_image_bytes, np.uint8)
+		returned_image_np = cv2.imdecode(returned_image_array, cv2.IMREAD_COLOR) 
+		
+		cv2.imshow("Returned image", returned_image_np) cv2.waitKey(0)
+		cv2.destroyAllWindows() else: print("Server return error message :" +
+		received_data_JSON_obj.get("errMessage"))
+
+else: 
+	print("Server return error message :" + received_data_JSON_obj.get("errMessage"))
+```
+<br/>
+***Guidelines for preparing reference image.***<br/>
