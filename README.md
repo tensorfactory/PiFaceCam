@@ -66,7 +66,7 @@ The run() function can receive many parameters. Description of each parameter ar
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
 |callback_function|Function|None|[1]Callback function to retrieve facial recognition data and perform post recognition activities.| 
-|faceids_folder_pathname|String|None|Path to where images of each id are stored.| 
+|faceids_folder_pathname|String|None|[2]Path to where images of each id are stored.| 
 |device_id|String|"CAM001"|Name of device. Will be displayed at the bottom left of video screen.Maximum length allowed is 10 characters.| 
 |cam_setup|String|"MONO_PICAM"|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
 |stereo_left_cam_type|String|"USB"|Left camera type for stereo setup. Available options are  "PICAM" and "USB".|
@@ -98,7 +98,7 @@ The run() function can receive many parameters. Description of each parameter ar
 
 **Details:**
 
-[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
+**[1] callback_function:** This function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
 |Key|Description|
 |:--:|:--|
 |"image"|BGR image in uint8 numpy array format (HeightxWidthxDepth).|
@@ -136,4 +136,4 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-
+[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
