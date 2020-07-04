@@ -279,15 +279,15 @@ image size (H). (Example, if the image size is 500pixels x 500pixels, then m has
 within the range of 50 to 125pixels.)
 4) Image size (W and H) has to be within the range of 320 to 512 pixels.
 
-<br/><br/>
+<br/>
 
-**Terms and conditions:**
+**Terms and conditions:**<br/>
 This is the PiFaceCam License Agreement
 1. Introduction
-1.1 The PiFaceCam (referred to in the License Agreement as the "PFC") is licensed to you subject to the terms of the License Agreement. The License Agreement forms a legally binding contract between you and TensorFactory in relation to your use of the PFC.
-1.2 "TensorFactory" means TensorFactory Enterprise and its owner.
+* 1.1 The PiFaceCam (referred to in the License Agreement as the "PFC") is licensed to you subject to the terms of the License Agreement. The License Agreement forms a legally binding contract between you and TensorFactory in relation to your use of the PFC.
+* 1.2 "TensorFactory" means TensorFactory Enterprise and its owner.
 2. Accepting this License Agreement
-2.1 By downloading, accessing or using the PFC, you agree to be bound by this License Agreement. If you do not accept the License Agreement, you must immediately discontinue your use of PFC. Continued use of the PFC will constitute acceptance of the License Agreement.
+* 2.1 By downloading, accessing or using the PFC, you agree to be bound by this License Agreement. If you do not accept the License Agreement, you must immediately discontinue your use of PFC. Continued use of the PFC will constitute acceptance of the License Agreement.
 2.2 If you are agreeing to be bound by the License Agreement on behalf of your employer or other entity, you represent and warrant that you have full legal authority to bind your employer or such entity to the License Agreement. If you do not have the requisite authority, you may not accept the License Agreement or use the PFC on behalf of your employer or other entity.
 3. PFC License from TensorFactory
 3.1 Subject to the terms of the License Agreement, TensorFactory grants you a limited, worldwide, royalty-free, non-assignable, non-exclusive, and non-sublicensable license to use the PFC.
