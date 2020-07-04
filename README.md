@@ -205,7 +205,7 @@ Returned JSON object from verification server to client.
 |"imageHeight"|Height of the image from verification server.|
 |"faces"|List of faces detected. Only faces that passed the dimensional constrain check.|
 |"returnImage"|Returned image (base64 string)|
-<br/>
+
 ***Faces list.***<br/>
 |Key|Value|
 |:--|:--|
