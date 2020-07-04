@@ -136,4 +136,16 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-[1] Callback function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
+**[2] faceids_folder_pathname:** This is the path to the folder where you store images for each person. PiFaceCam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder".<br/>
+```
+imagefolder
+├── Adam
+│   ├── image01.jpg
+│   ├── image02.jpg
+│   └── image03.jpg
+├── Lisa
+│   ├── image01.jpg
+│   └── image02.jpg
+├── James
+│   └── image01.jpg
+```
