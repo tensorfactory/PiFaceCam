@@ -216,6 +216,7 @@ Returned JSON object from verification server to client.
 |"confPercentage"|Confidence level (%) of face matches image sent.|
 <br/>
 Similarly, the first 4 bytes of the returned packet indicates the length of packet.
+
 ```
 # -------------Receive reply from server----------------- 
 len_of_packet_bytes = sock.recv(4) 
