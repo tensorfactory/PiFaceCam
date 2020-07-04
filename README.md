@@ -270,3 +270,10 @@ else:
 ***Guidelines for preparing reference image.***
 
 ![Face guidelines](https://github.com/tensorfactory/PiFaceCam/blob/master/images/face_guidelines.JPG)
+The reference image used for verification has to meet the following guidelines, failing which may affect the accuracy or getting rejected by the verification server.
+1) The face (green box) has to be at the center of the image.
+2) The image has to be square (W = H).
+3) The margin (m) between face and border of image has to be within 10~25 % of the
+image size (H). (Example, if the image size is 500pixels x 500pixels, then m has to be
+within the range of 50 to 125pixels.)
+4) Image size (W and H) has to be within the range of 320 to 512 pixels.
