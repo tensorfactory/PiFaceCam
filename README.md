@@ -278,3 +278,33 @@ The reference image used for verification has to meet the following guidelines, 
 image size (H). (Example, if the image size is 500pixels x 500pixels, then m has to be
 within the range of 50 to 125pixels.)
 4) Image size (W and H) has to be within the range of 320 to 512 pixels.
+
+<br/><br/>
+
+**Terms and conditions:**
+This is the PiFaceCam License Agreement
+1. Introduction
+1.1 The PiFaceCam (referred to in the License Agreement as the "PFC") is licensed to you subject to the terms of the License Agreement. The License Agreement forms a legally binding contract between you and TensorFactory in relation to your use of the PFC.
+1.2 "TensorFactory" means TensorFactory Enterprise and its owner.
+2. Accepting this License Agreement
+2.1 By downloading, accessing or using the PFC, you agree to be bound by this License Agreement. If you do not accept the License Agreement, you must immediately discontinue your use of PFC. Continued use of the PFC will constitute acceptance of the License Agreement.
+2.2 If you are agreeing to be bound by the License Agreement on behalf of your employer or other entity, you represent and warrant that you have full legal authority to bind your employer or such entity to the License Agreement. If you do not have the requisite authority, you may not accept the License Agreement or use the PFC on behalf of your employer or other entity.
+3. PFC License from TensorFactory
+3.1 Subject to the terms of the License Agreement, TensorFactory grants you a limited, worldwide, royalty-free, non-assignable, non-exclusive, and non-sublicensable license to use the PFC.
+3.2 You agree that TensorFactory own all legal right, title and interest in and to the PFC, including any Intellectual Property Rights that subsist in the PFC. "Intellectual Property Rights" means any and all rights under patent law, copyright law, trade secret law, trademark law, and any and all other proprietary rights. TensorFactory reserves all rights not expressly granted to you.
+3.3 You may not use the PFC for any purpose not expressly permitted by the License Agreement. You may not modify, decompile, reverse engineer or disassemble any part of the PFC.
+3.4 You agree that the form and nature of the PFC that TensorFactory provides may change without prior notice to you and that future versions of the PFC may be incompatible with files generated on previous versions of the PFC.
+3.5	Nothing in the License Agreement gives you a right to use any of TensorFactory's trade names, trademarks, service marks, logos, domain names, or other distinctive brand features.
+4. Use of the PFC by You
+4.1 You agree to use the PFC only for purposes that are permitted by (a) the License Agreement and (b) any applicable law, regulation or generally accepted practices or guidelines in the relevant jurisdictions.
+4.2 You agree that if you use the PFC on general public persons, you will protect the privacy and legal rights of those persons.
+4.3 You agree that you are solely responsible for (and that TensorFactory has no responsibility to you or to any third party for) any data, content, or resources that you create, transmit or display through PFC, and for the consequences of your actions (including any loss or damage which TensorFactory may suffer) by doing so.
+4.4 You agree that you are solely responsible for (and that TensorFactory has no responsibility to you or to any third party for) any breach of your obligations under the License Agreement, any applicable third party contract or Terms of Service, or any applicable law or regulation, and for the consequences (including any loss or damage which TensorFactory or any third party may suffer) of any such breach.
+5. DISCLAIMER OF WARRANTIES
+5.1 YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE PFC IS AT YOUR SOLE RISK AND THAT THE APPLICATION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND FROM TENSORFACTORY.
+5.2 YOUR USE OF THE PFC IS AT YOUR OWN DISCRETION AND RISK AND YOU ARE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR OTHER DEVICE OR LOSS OF DATA THAT RESULTS FROM SUCH USE.
+5.3 TENSORFACTORY FURTHER EXPRESSLY DISCLAIMS ALL WARRANTIES AND CONDITIONS OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO THE IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+6. LIMITATION OF LIABILITY
+6.1 YOU EXPRESSLY UNDERSTAND AND AGREE THAT TENSORFACTORY SHALL NOT BE LIABLE TO YOU UNDER ANY THEORY OF LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES THAT MAY BE INCURRED BY YOU, INCLUDING ANY LOSS OF DATA, WHETHER OR NOT TENSORFACTORY HAVE BEEN ADVISED OF OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF ANY SUCH LOSSES ARISING.
+7. Indemnification
+7.1 To the maximum extent permitted by law, you agree to defend, indemnify and hold harmless TensorFactory from and against any and all claims, actions, suits or proceedings, as well as any and all losses, liabilities, damages, costs and expenses (including reasonable attorneys fees) arising out of or accruing from (a) your use of the PFC that infringes any copyright, trademark, trade secret, trade dress, patent or other intellectual property right of any person or defames any person or violates their rights of publicity or privacy, and (b) any non-compliance by you with the License Agreement.
