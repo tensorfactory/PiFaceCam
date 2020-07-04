@@ -162,6 +162,7 @@ Once setup, the raspberry pi will act as a verification server. Any client can s
 |Token|"token"|String|
 |Image|"image"|Reference image (base64 string)|
 |If need to return image|"need_return_image"|Boolean|
+
 The image bytes have to be converted to base64 string (see below example). The length of this JSON bytes needs to be included at the beginning of the packet when send to verification server. The length value is encoded in a big-endian ordering 4 bytes.
 ```
 # --------Load image bytes from file-------- 
