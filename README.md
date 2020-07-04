@@ -268,4 +268,5 @@ else:
 ```
 
 ***Guidelines for preparing reference image.***
+
 ![Face guidelines](https://github.com/tensorfactory/PiFaceCam/blob/master/images/face_guidelines.JPG)
