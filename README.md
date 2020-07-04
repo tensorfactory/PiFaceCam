@@ -8,7 +8,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi3 Model B+ a
 1. Run efficiently on Raspberry Pi.
 2. Highly accurate even when faces are partially covered by face-masks.
 3. Ease of use. Cameras management, face ids creation, facial-recognition and video creation/streaming are all handled automatically by pifacecam.
-4. Flexible to implement. Important facial-recognition information can be retrieve via a callback-function for further implementation.
+4. Flexible to implement. Important facial-recognition information can be retrieve via a callback-function for any post recognition actions.
 5. Powerful. On top of basic facial-recognition (faces are identified against pre-stored facial ids.), pifacecam can run in "verification server" mode where a client can upload photos for verification against the person infront of camera.
 6. Stereo cameras setup option for defense against attack of placing a photo infront of camera.
 
@@ -74,8 +74,8 @@ The run() function can receive many parameters. Description of each parameter ar
 |detect_conf_percent|Int/Float|99.9|Minimum confident percentage required to identify a person.|
 |status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 and different from shutdown_pin_num|
 |shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num|
-|full_face_only|Boolean|False|When set to true, will force pifacecam to use whole face for recognition.|
-|eyes_only|Boolean|False|When set to true, will force pifacecam to focus on the eyes area for recognition.|
+|full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
+|eyes_only|Boolean|False|[3]When set to true, will force pifacecam to focus on the eyes area for recognition.|
 |high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton. This will however limit the number of face for recognition to one (instead of six in the standard mode). Only the most prominent face will be recognised.|
 |show_bbox|Boolean|True|Whether to show bounding boxes around detected faces during video streaming.|
 |show_faceid|Boolean|True|Display the person's id below each identified face during video streaming.|
@@ -85,10 +85,10 @@ The run() function can receive many parameters. Description of each parameter ar
 |show_positioning_guides|Boolean|False|Display the window borders and min/max detectable face size during video streaming.|
 |show_conf_percentage|Boolean|True|Display the recognition confidence percentage above each identified face during video streaming.|
 |show_precision_mode|Boolean|True|Display the word "HP" beside the device id if high precision mode is ON or "STD" if OFF.|
-|stereo_max_delta_bbox_w_percent|Int/Float|50|For stereo cameras setting only. Max delta percentage between left and right camera bbox width. Value has to be between 0 and 100|
-|stereo_max_delta_bbox_h_percent|Int/Float|50|For stereo cameras setting only. Max delta percentage between left and right camera bbox height. Value has to be between 0 and 100|
-|stereo_min_delta_face_angle|Int/Float|20|For stereo cameras setting only. Min delta percentage between left and right face angle. Value has to be between 0 and 100, and smaller than stereo_max_delta_face_angle|
-|stereo_max_delta_face_angle|Int/Float|60|For stereo cameras setting only. Max delta percentage between left and right face angle. Value has to be between 0 and 100, and larger than stereo_min_delta_face_angle|
+|stereo_max_delta_bbox_w_percent|Int/Float|50|[4]For stereo cameras setting only. Max delta percentage between left and right camera bbox width. Value has to be between 0 and 100|
+|stereo_max_delta_bbox_h_percent|Int/Float|50|[4]For stereo cameras setting only. Max delta percentage between left and right camera bbox height. Value has to be between 0 and 100|
+|stereo_min_delta_face_angle|Int/Float|20|[5]For stereo cameras setting only. Min delta percentage between left and right face angle. Value has to be between 0 and 100, and smaller than stereo_max_delta_face_angle|
+|stereo_max_delta_face_angle|Int/Float|60|[5]For stereo cameras setting only. Max delta percentage between left and right face angle. Value has to be between 0 and 100, and larger than stereo_min_delta_face_angle|
 |in_verification_server_mode|Boolean|False|Run as facial verification server.|
 |verification_server_port_no|Int|9990|Port number of verification server.|
 |verification_server_token|String|None|If set, will use to validate client's request.|
@@ -136,7 +136,7 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-**[2] faceids_folder_pathname:** This is the path to the folder where you store images for each person. PiFaceCam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder".<br/>
+**[2] faceids_folder_pathname:** This is the path to the folder where you store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids Adam, Lisa and James.<br/>
 ```
 imagefolder
 ├── Adam
@@ -147,5 +147,8 @@ imagefolder
 │   ├── image01.jpg
 │   └── image02.jpg
 ├── James
-│   └── image01.jpg
+    └── image01.jpg
 ```
+**[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/>
+**[4] stereo_max_delta_bbox_w_percent/stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
+**[5] stereo_min_delta_face_angle/stereo_min_delta_face_angle:** 
