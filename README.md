@@ -35,7 +35,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi3 Model B+ a
 
 **Hardware requirement / setup:**
 1. Raspberry Pi3 Model B+ and Pi4
-2. Picamera or USB camera.(Note: For stereo camera setup, you will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
+2. Picamera or USB camera.(Note: For stereo camera setup, we will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
 3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and on continuously when system is ready. LED blinks indefinitely signify error has occurred.
 4. GPIO26 (pin number can be changed later) connected to ground via a resistor. It will trigger program exit when connect to high.
 5. As facial-recognition is computationally heavy, proper heat management is required. Standard cooling fan with heat sink on CPU was tested to be sufficient.
@@ -48,7 +48,7 @@ $ python3
 >>>from pifacecam import pifacecam
 >>>pifacecam.run()
 ```
-You should see something like the following print out.<br/>
+We should see something like the following print out.<br/>
 ```
 1) Checking for attached Picamera.
 2) Picamera found.
@@ -56,7 +56,7 @@ You should see something like the following print out.<br/>
 4) USB camera found at index[1].
 ```
 
-The status LED will blinks during system loading and turn ON continuously when system is ready. Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` you should able to view the camera feeds with some facial recognition information.
+The status LED will blinks during system loading and turn ON continuously when system is ready. Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` we should able to view the camera feeds with some facial recognition information.
 <br/><br/>
 
 **Parameters:**
@@ -136,7 +136,7 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-**[2] faceids_folder_pathname:** This is the path to the folder where you store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids Adam, Lisa and James.<br/>
+**[2] faceids_folder_pathname:** This is the path to the folder where we store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids Adam, Lisa and James.<br/>
 ```
 imagefolder
 ├── Adam
@@ -153,7 +153,7 @@ imagefolder
 **[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
 **[5] stereo_min_delta_face_angle/ stereo_min_delta_face_angle:** 
 ![Stereo cameras layout](https://github.com/tensorfactory/PiFaceCam/blob/master/images/stereo_cameras_layout.JPG)
-To defense against attack using photo, you can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -α & β. The difference of these angles (β – (-α) = β + α) should be about the same as the angle between the left and right camera.
+To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -α & β. The difference of these angles (β – (-α) = β + α) should be about the same as the angle between the left and right camera.
 For this example, the left and right cameras were placed 40˚ apart, β – (-α) will be close to 40˚. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and β – (-α) will be close to 0˚. We can set a minimum and maximum acceptable face angle (β + α). Both values should be between 0˚ and 100˚.<br/>
 **[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
 Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. <br/>
