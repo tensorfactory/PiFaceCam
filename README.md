@@ -193,7 +193,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(server_address) 
 sock.sendall(total_bytes)
 ```
-<br/>
+
 ***Information returned from server***<br/>
 Returned JSON object from verification server to client.
 |Key|Value|
