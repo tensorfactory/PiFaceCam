@@ -34,9 +34,9 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi3 Model B+ a
 
 
 **Hardware requirement / setup:**
-1. Raspberry Pi3 Model B+ and Pi4
+1. Raspberry Pi3 Model B+ or Pi4
 2. Picamera or USB camera.(Note: For stereo camera setup, we will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
-3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and on continuously when system is ready. LED blinks indefinitely signify error has occurred.
+3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and ON continuously when system is ready. LED blinks indefinitely signify error has occurred.
 4. GPIO26 (pin number can be changed later) connected to ground via a resistor. It will trigger program exit when connect to high.
 5. As facial-recognition is computationally heavy, proper heat management is required. Standard cooling fan with heat sink on CPU was tested to be sufficient.
 
@@ -44,7 +44,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi3 Model B+ a
 **Quick Run:**
 - In terminal, run the following lines.<br/>
 ```
-$ python3
+$ sudo python3
 >>>from pifacecam import pifacecam
 >>>pifacecam.run()
 ```
@@ -55,8 +55,8 @@ We should see something like the following print out.<br/>
 3) Checking for attached USB camera.
 4) USB camera found at index[1].
 ```
-Note: In some version of OpenCV, you may see bunch of warning messages, but so far we haven't encounter any problem during operation despite of these warning messages.<br/>
-The status LED will blinks during system loading and turn ON continuously when system is ready. Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` we should able to view the camera feeds with some facial recognition information.
+(Note: In some version of OpenCV, you may see bunch of warning messages, but so far we haven't encounter any problem during operation despite of these warning messages.)<br/>
+The status LED will blinks during system loading and turn ON continuously when system is ready.<br/> Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` we should able to view the camera feeds with some facial recognition information.
 <br/><br/>
 
 **Parameters:**
@@ -152,16 +152,19 @@ imagefolder
 |-- James
     |-- image01.jpg
 ```
-**[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/>
-**[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
+**[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/><br/>
+**[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/><br/>
 **[5] stereo_min_delta_face_angle/ stereo_min_delta_face_angle:** 
-![Stereo cameras layout](https://drive.google.com/file/d/1WOtN0JnfGKFyqqY1wos36gQ79bGWxeM4/view?usp=sharing)
-To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -alpha & beta. The difference of these angles (beta – (-alpha) = beta + alpha) should be about the same as the angle between the left and right camera.
-For this example, the left and right cameras were placed 40deg apart, beta – (-alpha) will be close to 40deg. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and beta – (-alpha) will be close to 0deg. We can set a minimum and maximum acceptable face angle (beta + alpha). Both values should be between 0deg and 100deg.<br/>
+
+![Stereo cameras layout](https://raw.githubusercontent.com/tensorfactory/PiFaceCam/master/images/stereo_cameras_layout.JPG)
+
+To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -alpha & beta. The difference of these angles (beta -(-alpha) = beta + alpha) should be about the same as the angle between the left and right camera.
+For this example, the left and right cameras were placed 40deg apart, beta - (-alpha) will be close to 40deg. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and beta - (-alpha) will be close to 0deg. We can set a minimum and maximum acceptable face angle (beta + alpha). Both values should be between 0deg and 100deg.<br/><br/>
 **[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
-Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. <br/>
+Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. <br/><br/>
 ***Information to server***<br/>
 To request for verification, the client needs to send the reference image, the token, and a boolean indicating if a returned image is required, in JSON format to server.
+
 |Element|Key|Value|
 |:--|:--:|:--:|
 |Token|"token"|String|
@@ -197,6 +200,8 @@ sock.connect(server_address)
 sock.sendall(total_bytes)
 ```
 
+<br/>
+
 ***Information returned from server***<br/>
 Returned JSON object from verification server to client.
 
@@ -210,8 +215,9 @@ Returned JSON object from verification server to client.
 |"faces"|List of faces detected. Only faces that passed the dimensional constrain check.|
 |"returnImage"|Returned image (base64 string)|
 
+<br/>
 
-***Faces list.***<br/>
+***Faces list.***
 
 |Key|Value|
 |:--|:--|
@@ -273,10 +279,11 @@ else:
 	print("Server return error message :" + received_data_JSON_obj.get("errMessage"))
 ```
 
+<br/>
 
 ***Guidelines for preparing reference image.***
 
-![Face guidelines](https://drive.google.com/file/d/1aQyjl0fxCgnEAE0VhWPBZeXMaekKP-4H/view?usp=sharing)
+![Face guidelines](https://raw.githubusercontent.com/tensorfactory/PiFaceCam/master/images/face_guidelines.JPG)
 
 The reference image used for verification has to meet the following guidelines, failing which may affect the accuracy or getting rejected by the verification server.
 1) The face (green box) has to be at the center of the image.
@@ -289,29 +296,35 @@ within the range of 50 to 125pixels.)
 <br/>
 
 **Terms and conditions:**<br/>
-This is the PiFaceCam License Agreement
-1. Introduction
+This is the PiFaceCam License Agreement<br/>
+1) Introduction
 * 1.1 The PiFaceCam (referred to in the License Agreement as the "PFC") is licensed to you subject to the terms of the License Agreement. The License Agreement forms a legally binding contract between you and TensorFactory in relation to your use of the PFC.
 * 1.2 "TensorFactory" means TensorFactory Enterprise and its owner.
-2. Accepting this License Agreement
+
+2) Accepting this License Agreement
 * 2.1 By downloading, accessing or using the PFC, you agree to be bound by this License Agreement. If you do not accept the License Agreement, you must immediately discontinue your use of PFC. Continued use of the PFC will constitute acceptance of the License Agreement.
 * 2.2 If you are agreeing to be bound by the License Agreement on behalf of your employer or other entity, you represent and warrant that you have full legal authority to bind your employer or such entity to the License Agreement. If you do not have the requisite authority, you may not accept the License Agreement or use the PFC on behalf of your employer or other entity.
-3. PFC License from TensorFactory
+
+3) PFC License from TensorFactory
 * 3.1 Subject to the terms of the License Agreement, TensorFactory grants you a limited, worldwide, royalty-free, non-assignable, non-exclusive, and non-sublicensable license to use the PFC.
 * 3.2 You agree that TensorFactory own all legal right, title and interest in and to the PFC, including any Intellectual Property Rights that subsist in the PFC. "Intellectual Property Rights" means any and all rights under patent law, copyright law, trade secret law, trademark law, and any and all other proprietary rights. TensorFactory reserves all rights not expressly granted to you.
 * 3.3 You may not use the PFC for any purpose not expressly permitted by the License Agreement. You may not modify, decompile, reverse engineer or disassemble any part of the PFC.
 * 3.4 You agree that the form and nature of the PFC that TensorFactory provides may change without prior notice to you and that future versions of the PFC may be incompatible with files generated on previous versions of the PFC.
 * 3.5	Nothing in the License Agreement gives you a right to use any of TensorFactory's trade names, trademarks, service marks, logos, domain names, or other distinctive brand features.
-4. Use of the PFC by You
+
+4) Use of the PFC by You
 * 4.1 You agree to use the PFC only for purposes that are permitted by (a) the License Agreement and (b) any applicable law, regulation or generally accepted practices or guidelines in the relevant jurisdictions.
 * 4.2 You agree that if you use the PFC on general public persons, you will protect the privacy and legal rights of those persons.
 * 4.3 You agree that you are solely responsible for (and that TensorFactory has no responsibility to you or to any third party for) any data, content, or resources that you create, transmit or display through PFC, and for the consequences of your actions (including any loss or damage which TensorFactory may suffer) by doing so.
 * 4.4 You agree that you are solely responsible for (and that TensorFactory has no responsibility to you or to any third party for) any breach of your obligations under the License Agreement, any applicable third party contract or Terms of Service, or any applicable law or regulation, and for the consequences (including any loss or damage which TensorFactory or any third party may suffer) of any such breach.
-5. DISCLAIMER OF WARRANTIES
+
+5) DISCLAIMER OF WARRANTIES
 * 5.1 YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE PFC IS AT YOUR SOLE RISK AND THAT THE APPLICATION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND FROM TENSORFACTORY.
 * 5.2 YOUR USE OF THE PFC IS AT YOUR OWN DISCRETION AND RISK AND YOU ARE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR OTHER DEVICE OR LOSS OF DATA THAT RESULTS FROM SUCH USE.
 * 5.3 TENSORFACTORY FURTHER EXPRESSLY DISCLAIMS ALL WARRANTIES AND CONDITIONS OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO THE IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
-6. LIMITATION OF LIABILITY
+
+6) LIMITATION OF LIABILITY
 * 6.1 YOU EXPRESSLY UNDERSTAND AND AGREE THAT TENSORFACTORY SHALL NOT BE LIABLE TO YOU UNDER ANY THEORY OF LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES THAT MAY BE INCURRED BY YOU, INCLUDING ANY LOSS OF DATA, WHETHER OR NOT TENSORFACTORY HAVE BEEN ADVISED OF OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF ANY SUCH LOSSES ARISING.
-7. Indemnification
+
+7) Indemnification
 * 7.1 To the maximum extent permitted by law, you agree to defend, indemnify and hold harmless TensorFactory from and against any and all claims, actions, suits or proceedings, as well as any and all losses, liabilities, damages, costs and expenses (including reasonable attorneys fees) arising out of or accruing from (a) your use of the PFC that infringes any copyright, trademark, trade secret, trade dress, patent or other intellectual property right of any person or defames any person or violates their rights of publicity or privacy, and (b) any non-compliance by you with the License Agreement.
