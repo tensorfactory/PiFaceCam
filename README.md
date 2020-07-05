@@ -55,7 +55,7 @@ We should see something like the following print out.<br/>
 3) Checking for attached USB camera.
 4) USB camera found at index[1].
 ```
-
+Note: In some version of OpenCV, you may see bunch of warning messages, but so far we haven't encounter any problem during operation despite of these warning messages.<br/>
 The status LED will blinks during system loading and turn ON continuously when system is ready. Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` we should able to view the camera feeds with some facial recognition information.
 <br/><br/>
 
@@ -99,6 +99,7 @@ The run() function can receive many parameters. Description of each parameter ar
 **Details:**
 
 **[1] callback_function:** This function will receive a dictionary containing facial recognition information "data_dict". This function will be called once every frame. Ideally, any processing activities in this function should be able to complete before the next frame arrives or else the next frame will be ignored. Listed below are the available dictionary keys. <br/>
+
 |Key|Description|
 |:--:|:--|
 |"image"|BGR image in uint8 numpy array format (HeightxWidthxDepth).|
@@ -139,22 +140,24 @@ def example_callback_function(data_dict):
 **[2] faceids_folder_pathname:** This is the path to the folder where we store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids Adam, Lisa and James.<br/>
 ```
 imagefolder
-├── Adam
-│   ├── image01.jpg
-│   ├── image02.jpg
-│   └── image03.jpg
-├── Lisa
-│   ├── image01.jpg
-│   └── image02.jpg
-├── James
-    └── image01.jpg
+|-- Adam
+|   |-- image01.jpg
+|   |-- image02.jpg
+|   |-- image03.jpg
+|
+|-- Lisa
+|   |-- image01.jpg
+|   |-- image02.jpg
+|
+|-- James
+    |-- image01.jpg
 ```
 **[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/>
 **[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/>
 **[5] stereo_min_delta_face_angle/ stereo_min_delta_face_angle:** 
-![Stereo cameras layout](https://github.com/tensorfactory/PiFaceCam/blob/master/images/stereo_cameras_layout.JPG)
-To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -α & β. The difference of these angles (β – (-α) = β + α) should be about the same as the angle between the left and right camera.
-For this example, the left and right cameras were placed 40˚ apart, β – (-α) will be close to 40˚. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and β – (-α) will be close to 0˚. We can set a minimum and maximum acceptable face angle (β + α). Both values should be between 0˚ and 100˚.<br/>
+![Stereo cameras layout](https://drive.google.com/file/d/1WOtN0JnfGKFyqqY1wos36gQ79bGWxeM4/view?usp=sharing)
+To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -alpha & beta. The difference of these angles (beta – (-alpha) = beta + alpha) should be about the same as the angle between the left and right camera.
+For this example, the left and right cameras were placed 40deg apart, beta – (-alpha) will be close to 40deg. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and beta – (-alpha) will be close to 0deg. We can set a minimum and maximum acceptable face angle (beta + alpha). Both values should be between 0deg and 100deg.<br/>
 **[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
 Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. <br/>
 ***Information to server***<br/>
@@ -196,6 +199,7 @@ sock.sendall(total_bytes)
 
 ***Information returned from server***<br/>
 Returned JSON object from verification server to client.
+
 |Key|Value|
 |:--|:--|
 |"isSuccessful"|True / False|
@@ -206,7 +210,9 @@ Returned JSON object from verification server to client.
 |"faces"|List of faces detected. Only faces that passed the dimensional constrain check.|
 |"returnImage"|Returned image (base64 string)|
 
+
 ***Faces list.***<br/>
+
 |Key|Value|
 |:--|:--|
 |"top"|Top y-coordinate of face bounding box.|
@@ -270,7 +276,7 @@ else:
 
 ***Guidelines for preparing reference image.***
 
-![Face guidelines](https://github.com/tensorfactory/PiFaceCam/blob/master/images/face_guidelines.JPG)
+![Face guidelines](https://drive.google.com/file/d/1aQyjl0fxCgnEAE0VhWPBZeXMaekKP-4H/view?usp=sharing)
 
 The reference image used for verification has to meet the following guidelines, failing which may affect the accuracy or getting rejected by the verification server.
 1) The face (green box) has to be at the center of the image.
