@@ -6,11 +6,11 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi3 Model B+ a
 
 **Main Features:**
 1. Run efficiently on Raspberry Pi.
-2. Highly accurate even when faces are partially covered by face-masks.
-3. Ease of use. Cameras management, face ids creation, facial-recognition and video creation/streaming are all handled automatically by pifacecam.
-4. Flexible to implement. Important facial-recognition information can be retrieve via a callback-function for any post recognition actions.
-5. Powerful. On top of basic facial-recognition (faces are identified against pre-stored facial ids.), pifacecam can run in "verification server" mode where a client can upload photos for verification against the person infront of camera.
-6. Stereo cameras setup option for defense against attack of placing a photo infront of camera.
+2. Ease of use. Cameras management, face ids creation, facial-recognition and video creation/streaming are all handled automatically by pifacecam.
+3. Flexible to implement. Important facial-recognition information can be retrieve via a callback-function for any post recognition actions.
+4. Powerful. On top of basic facial-recognition (faces are identified against pre-stored facial ids.), pifacecam can run in "verification server" mode where a client can upload photos for verification against the person infront of camera.
+5. Stereo cameras setup option for defense against attack of placing a photo infront of camera.
+6. Able to recognised faces that are partially covered by face-masks.
 
 
 **Prerequisites (Software):**
@@ -71,7 +71,7 @@ The run() function can receive many parameters. Description of each parameter ar
 |cam_setup|String|"MONO_PICAM"|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
 |stereo_left_cam_type|String|"USB"|Left camera type for stereo setup. Available options are  "PICAM" and "USB".|
 |stereo_right_cam_type|String|"PICAM"|Right camera type for stereo setup. Available options are  "PICAM" and "USB".|
-|detect_conf_percent|Int/Float|99.9|Minimum confident percentage required to identify a person.|
+|detect_conf_percent|Int/Float|95|Minimum confident percentage required to identify a person.|
 |status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 and different from shutdown_pin_num|
 |shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num|
 |full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
