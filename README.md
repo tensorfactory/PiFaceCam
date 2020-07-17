@@ -311,12 +311,12 @@ within the range of 50 to 125pixels.)
 <br/>
 
 ***Advanced discussions:***<br/>
-- Events happened during the current run can be retrieve from info_log.txt file stored in the module folder. This fill will be overided each time pifacecam start.
-- Any parameters set in the run function will be verified before accepted. If rejected, the error message will be print out and log in info_log.txt file. If accepted, they will overide the default values. These values (except for "faceids_folder_pathname"),  will persist even if you remove(not set) the parameter in the run function. 
+- Events happened during the current run can be retrieved from info_log.txt file stored in the module folder. This file will be overided each time pifacecam startd.
+- Any parameters set in the run function will be verified before accepted. If rejected, the error message will be print out and logged in info_log.txt file. If accepted, they will overide the default values. These values (except for "faceids_folder_pathname"),  will persist even if you subsequently remove(not set) the parameter in the "run" function. 
 - To reset all settings to the default values, you need to delete the settings.dat file in the module folder.
-- During face id processing [2], images with faces not facing the front, belongs to different person, partial obstructed or to blur will be rejected. These images will be moved to the "rejected" folder created within the original folder.
-- Once face ids are created, they are stored as encrypted files (faceids_image_cache.dat & data.dat).You can choose to remove all images from "faceids_folder_pathname" TOGETHER with the id folders. 
-- For removing a saved face id, you create an empty folder for the face id. PiFaceCam will remove the saved id when it detect an empty folder for the id during start. To remove all saved id, you need to delete both faceids_image_cache.dat & data.dat files.
+- During face id processing [2], images with face not facing front, belongs to different person, partially obstructed or too blur will be rejected. These rejected images will be moved to a "rejected" folder created within the original folder.
+- Once face ids are created, they are stored as encrypted files (faceids_image_cache.dat & data.dat).You can subsequently choose to remove all images from "faceids_folder_pathname" TOGETHER with the id folders. 
+- For removing a saved face id, you create an empty folder for the face id. PiFaceCam will remove any saved ids when it detect an empty folder for the id during start. To remove all saved id at once, just delete both faceids_image_cache.dat & data.dat files.<br/>
 
 
 
