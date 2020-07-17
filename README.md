@@ -4,6 +4,7 @@
 #### Overview
 PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4GB. Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.2GB). 
 
+
 **Main Features:**
 1. Run efficiently on Raspberry Pi.
 2. Ease of use. Cameras management, face ids creation, facial-recognition and video creation/streaming are all handled automatically by pifacecam.
@@ -12,6 +13,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 5. Stereo cameras setup option for defense against attack of placing a photo infront of camera.
 6. Able to recognised faces that are partially covered by face-masks.
 
+
 **PiFaceCam's LFW benchmark:**
 [Category: Unrestricted, Labeled Outside Data](http://vis-www.cs.umass.edu/lfw/results.html#UnrestrictedLb)
 
@@ -19,7 +21,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 |:--|:--:|
 |High Precision|99.50|
 |Standard|99.22|
-|[Human performance](http://vis-www.cs.umass.edu/lfw/results.html#Human)|97.53|
+*[Human performance](http://vis-www.cs.umass.edu/lfw/results.html#Human) = 97.53 %.<br/>
 
 
 **Prerequisites (Software):**
