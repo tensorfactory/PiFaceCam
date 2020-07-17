@@ -47,7 +47,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 
 **Hardware requirement / setup:**
 1. Raspberry Pi4 Model B-4GB.(Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.2GB, but not tested).
-2. Picamera or USB camera.(Note: For stereo camera setup, we will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
+2. Picamera or USB camera.(Note: For stereo camera setup, you will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
 3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and ON continuously when system is ready. LED blinks indefinitely signify error has occurred.
 4. GPIO26 (pin number can be changed later) connected to ground via a resistor. It will trigger program exit when connect to high.
 5. As facial-recognition is computationally heavy, proper heat management is required. Standard cooling fan with heat sink on CPU was tested to be sufficient.
@@ -60,7 +60,7 @@ $ sudo python3
 >>>from pifacecam import pifacecam
 >>>pifacecam.run()
 ```
-We should see something like the following print out.<br/>
+You should see something like the following print out.<br/>
 ```
 1) Checking for attached Picamera.
 2) Picamera found.
@@ -68,7 +68,7 @@ We should see something like the following print out.<br/>
 4) USB camera found at index[1].
 ```
 (Note: In some version of OpenCV, you may see bunch of warning messages, but so far we haven't encounter any problem during operation despite of these warning messages.)<br/>
-The status LED will blinks during system loading and turn ON continuously when system is ready.<br/> Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` we should able to view the camera feeds with some facial recognition information.
+The status LED will blinks during system loading and turn ON continuously when system is ready.<br/> Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` you should able to view the camera feeds with some facial recognition information.
 <br/><br/>
 
 **Parameters:**
@@ -89,7 +89,7 @@ The run() function can receive many parameters. Description of each parameter ar
 |full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
 |eyes_only|Boolean|False|[3]When set to true, will force pifacecam to focus on the eyes area for recognition.|
 |high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton.|
-|max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time in high precision mode. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will means only the N most prominent faces will be recognised. This value has to be between 1 and 4|
+|max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time in high precision mode. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will mean only the N most prominent faces will be recognised. This value has to be between 1 and 4|
 |max_num_for_std_mode|Int|6|The maximum number of faces to detect each time in standard mode. This value has to be between 1 and 6|
 |show_bbox|Boolean|True|Whether to show bounding boxes around detected faces during video streaming.|
 |show_faceid|Boolean|True|Display the person's id below each identified face during video streaming.|
@@ -151,7 +151,7 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-**[2] faceids_folder_pathname:** This is the path to the folder where we store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids for Adam, Lisa and James.<br/>
+**[2] faceids_folder_pathname:** This is the path to the folder where you store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids for Adam, Lisa and James.<br/>
 This process may takes several minutes depending on how many ids and images are available. This process will only run once for each id when there is any change to the id folder.<br/>
 ```
 imagefolder
@@ -167,17 +167,17 @@ imagefolder
 |-- James
     |-- image01.jpg
 ```
-**[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, we can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: We can't set both full_face_only and eyes_only to true at the same time.)<br/><br/>
-**[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. We can limit the acceptable difference for facial recognition.<br/><br/>
+**[3] full_face_only/eyes_only:** When these two parameters were set to false(default), pifacecam will decide to use the whole face or only eyes area for recognition based on whether the mouth is covered. However, if it is known upfront that mouths will or will not be covered, you can use these parameters to force pifacecam to use full face or eyes only area for recognition. Doing this will improve the speed of recognition, especially in verification server mode. (Note: You can't set both full_face_only and eyes_only to true at the same time.)<br/><br/>
+**[4] stereo_max_delta_bbox_w_percent/ stereo_max_delta_bbox_h_percent:** In stereo cameras setting the size of face will varies as the person move towards the left or right camera. You can limit the acceptable difference for facial recognition.<br/><br/>
 **[5] stereo_min_delta_face_angle/ stereo_min_delta_face_angle:** 
 
 ![Stereo cameras layout](https://raw.githubusercontent.com/tensorfactory/PiFaceCam/master/images/stereo_cameras_layout.JPG)
 
-To defense against attack using photo, we can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -alpha & beta. The difference of these angles (beta -(-alpha) = beta + alpha) should be about the same as the angle between the left and right camera.
-For this example, the left and right cameras were placed 40deg apart, beta - (-alpha) will be close to 40deg. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and beta - (-alpha) will be close to 0deg. We can set a minimum and maximum acceptable face angle (beta + alpha). Both values should be between 0deg and 100deg.<br/><br/>
-**[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, we need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
+To defense against attack using photo, you can use stereo cameras setup. It works by detecting the face angles from the left and right camera, -alpha & beta. The difference of these angles (beta -(-alpha) = beta + alpha) should be about the same as the angle between the left and right camera.
+For this example, the left and right cameras were placed 40deg apart, beta - (-alpha) will be close to 40deg. However, if a photo (instead of a 3D face) was placed in front of both cameras, both cameras will measure the same face angle and beta - (-alpha) will be close to 0deg. You can set a minimum and maximum acceptable face angle (beta + alpha). Both values should be between 0deg and 100deg.<br/><br/>
+**[6] in_verification_server_mode/ verification_server_port_no/ verification_server_token:** In verification mode, you need to provide the port number for the server and if a verification token is also provides, it will be used by the client during request for validation.
 Once setup, the raspberry pi will act as a verification server. Any client can send to it a reference image for verification. The verification server will return if the person currently in front of the camera matches the person in the reference image. <br/><br/>
-***Information to server***<br/>
+***Information to server:***<br/>
 To request for verification, the client needs to send the reference image, the token, and a boolean indicating if a returned image is required, in JSON format to server.
 
 |Element|Key|Value|
@@ -217,7 +217,7 @@ sock.sendall(total_bytes)
 
 <br/>
 
-***Information returned from server***<br/>
+***Information returned from server:***<br/>
 Returned JSON object from verification server to client.
 
 |Key|Value|
@@ -232,7 +232,7 @@ Returned JSON object from verification server to client.
 
 <br/>
 
-***Faces list.***
+***Faces list:***
 
 |Key|Value|
 |:--|:--|
@@ -296,7 +296,7 @@ else:
 
 <br/>
 
-***Guidelines for preparing reference image.***
+***Guidelines for preparing reference image:***
 
 ![Face guidelines](https://raw.githubusercontent.com/tensorfactory/PiFaceCam/master/images/face_guidelines.JPG)
 
@@ -309,6 +309,16 @@ within the range of 50 to 125pixels.)
 4) Image size (W and H) has to be within the range of 320 to 512 pixels.
 
 <br/>
+
+***Advanced discussions:***<br/>
+- Events happened during the current run can be retrieve from info_log.txt file stored in the module folder. This fill will be overided each time pifacecam start.
+- Any parameters set in the run function will be verified before accepted. If rejected, the error message will be print out and log in info_log.txt file. If accepted, they will overide the default values. These values (except for "faceids_folder_pathname"),  will persist even if you remove(not set) the parameter in the run function. 
+- To reset all settings to the default values, you need to delete the settings.dat file in the module folder.
+- During face id processing [2], images with faces not facing the front, belongs to different person, partial obstructed or to blur will be rejected. These images will be moved to the "rejected" folder created within the original folder.
+- Once face ids are created, they are stored as encrypted files (faceids_image_cache.dat & data.dat).You can choose to remove all images from "faceids_folder_pathname" TOGETHER with the id folders. 
+- For removing a saved face id, you create an empty folder for the face id. PiFaceCam will remove the saved id when it detect an empty folder for the id during start. To remove all saved id, you need to delete both faceids_image_cache.dat & data.dat files.
+
+
 
 **Terms and conditions:**<br/>
 This is the PiFaceCam License Agreement<br/>
