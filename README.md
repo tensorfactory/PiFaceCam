@@ -46,7 +46,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 
 
 **Hardware requirement / setup:**
-1. Raspberry Pi4 Model B-4GB.(Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.8GB, but not tested).
+1. Raspberry Pi4 Model B-4GB.(Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.2GB, but not tested).
 2. Picamera or USB camera.(Note: For stereo camera setup, we will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
 3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and ON continuously when system is ready. LED blinks indefinitely signify error has occurred.
 4. GPIO26 (pin number can be changed later) connected to ground via a resistor. It will trigger program exit when connect to high.
@@ -83,12 +83,14 @@ The run() function can receive many parameters. Description of each parameter ar
 |cam_setup|String|"MONO_PICAM"|Defining the camera setup to use. Available options are  "MONO_PICAM"=Single Picamera; "MONO_USB"=Single USB camera; "STEREO_USB+PICAM"=1 USB + 1 Pi cameras; "NOCAM"=No camera.|
 |stereo_left_cam_type|String|"USB"|Left camera type for stereo setup. Available options are  "PICAM" and "USB".|
 |stereo_right_cam_type|String|"PICAM"|Right camera type for stereo setup. Available options are  "PICAM" and "USB".|
-|detect_conf_percent|Int/Float|95|Minimum confident percentage required to identify a person.|
+|detect_conf_percent|Int/Float|99.9|Minimum confident percentage required to identify a person.|
 |status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 and different from shutdown_pin_num|
 |shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num|
 |full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
 |eyes_only|Boolean|False|[3]When set to true, will force pifacecam to focus on the eyes area for recognition.|
-|high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton. This will however limit the number of face for recognition to one (instead of six in the standard mode). Only the most prominent face will be recognised.|
+|high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton.|
+|max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will means only the N most prominent faces will be recognised. This value has to be between 1 and 4|
+|max_num_for_std_mode|Int|6|The maximum number of faces to detect each time. This value has to be between 1 and 6|
 |show_bbox|Boolean|True|Whether to show bounding boxes around detected faces during video streaming.|
 |show_faceid|Boolean|True|Display the person's id below each identified face during video streaming.|
 |show_camid|Boolean|True|Display the device's id during video streaming.|
@@ -149,7 +151,8 @@ def example_callback_function(data_dict):
     # Perform post recognition task here....
 
 ```
-**[2] faceids_folder_pathname:** This is the path to the folder where we store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids Adam, Lisa and James.<br/>
+**[2] faceids_folder_pathname:** This is the path to the folder where we store images for each person. Pifacecam will scan this folder for any new images and generate the face ids for facial recognition. In the example below, faceids_folder_pathname will be path to "imagefolder" and pifacecam will create face ids for Adam, Lisa and James.<br/>
+This process may takes several minutes depending on how many ids and images are available. This process will only run once for each id when there is any change to the id folder.<br/>
 ```
 imagefolder
 |-- Adam
