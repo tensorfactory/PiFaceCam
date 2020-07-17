@@ -21,6 +21,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 |:--|:--:|
 |High Precision|99.50|
 |Standard|99.22|
+
 *[Human performance](http://vis-www.cs.umass.edu/lfw/results.html#Human) = 97.53 %.<br/>
 
 
