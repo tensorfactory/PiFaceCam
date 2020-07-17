@@ -2,11 +2,11 @@
 ## PiFaceCam
 ### Facial Recognition for Raspberry Pi
 #### Overview
-PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4GB. Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.2GB). 
+PiFaceCam is a facial recognition API for Raspberry Pi4 (Tested on Pi4 Model B-4GB. Pi4 2GB should be able to run as the RAM usage was estimated to peak around 1.0GB). 
 
 
 **Main Features:**
-1. Run efficiently on Raspberry Pi.
+1. Run efficiently on Raspberry Pi4.
 2. Ease of use. Cameras management, face ids creation, facial-recognition and video creation/streaming are all handled automatically by pifacecam.
 3. Flexible to implement. Important facial-recognition information can be retrieve via a callback-function for any post recognition actions.
 4. Powerful. On top of basic facial-recognition (faces are identified against pre-stored facial ids.), pifacecam can run in "verification server" mode where a client can upload photos for verification against the person infront of camera.
@@ -46,7 +46,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi (Tested on Pi4 Model B-4G
 
 
 **Hardware requirement / setup:**
-1. Raspberry Pi4 Model B-4GB.(Pi4 2GB should be able to run as total RAM usage was estimated to peak around 1.2GB, but not tested).
+1. Raspberry Pi4 (Tested on Pi4 Model B-4GB. Pi4 2GB should be able to run as the RAM usage was estimated to peak around 1.0GB). 
 2. Picamera or USB camera.(Note: For stereo camera setup, you will need 1 Picamera + 1 USB camera. PiFaceCam does not support 2 USB cameras)
 3. A LED connected to GPIO19 (pin number can be changed later) via a resistor as system status indicator.The LED will blinks during system loading and ON continuously when system is ready. LED blinks indefinitely signify error has occurred.
 4. GPIO26 (pin number can be changed later) connected to ground via a resistor. It will trigger program exit when connect to high.
