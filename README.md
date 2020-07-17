@@ -89,8 +89,8 @@ The run() function can receive many parameters. Description of each parameter ar
 |full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
 |eyes_only|Boolean|False|[3]When set to true, will force pifacecam to focus on the eyes area for recognition.|
 |high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton.|
-|max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will means only the N most prominent faces will be recognised. This value has to be between 1 and 4|
-|max_num_for_std_mode|Int|6|The maximum number of faces to detect each time. This value has to be between 1 and 6|
+|max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time in high precision mode. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will means only the N most prominent faces will be recognised. This value has to be between 1 and 4|
+|max_num_for_std_mode|Int|6|The maximum number of faces to detect each time in standard mode. This value has to be between 1 and 6|
 |show_bbox|Boolean|True|Whether to show bounding boxes around detected faces during video streaming.|
 |show_faceid|Boolean|True|Display the person's id below each identified face during video streaming.|
 |show_camid|Boolean|True|Display the device's id during video streaming.|
