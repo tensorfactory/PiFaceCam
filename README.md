@@ -26,7 +26,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi4 (Tested on Pi4 Model B-4
 
 
 **Prerequisites (Software):**
-1. Raspbian Buster OS with desktop (Tested on kernel version:4.19 & 5.4).
+1. Raspbian Buster OS with desktop (Tested on kernel version: 4.19 & 5.4).
 2. Python 3.5 (and above)
 3. Numpy
 4. Tensorflow 1.15
