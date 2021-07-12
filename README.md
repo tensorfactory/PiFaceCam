@@ -26,7 +26,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi4 (Tested on Pi4 Model B-4
 
 
 **Prerequisites (Software):**
-1. Raspbian Buster OS with desktop (Tested on kernel version: 4.19 & 5.4).
+1. Raspbian Buster OS with desktop (Tested on kernel version: 5.10.17).
 2. Python 3.5 (and above)
 3. Numpy
 4. Tensorflow 1.15
@@ -53,7 +53,7 @@ PiFaceCam is a facial recognition API for Raspberry Pi4 (Tested on Pi4 Model B-4
 5. As facial-recognition is computationally heavy, proper heat management is required. Standard cooling fan with heat sink on CPU was tested to be sufficient.
 
 
-**Quick Run:**
+**Quick run:**
 - In terminal, run the following lines.<br/>
 ```
 $ sudo python3
@@ -71,9 +71,29 @@ You should see something like the following print out.<br/>
 The status LED will blinks during system loading and turn ON continuously when system is ready.<br/> Once system is ready, open a browser and goto URL `http://[ipaddress of RPI]:9090/video` you should able to view the camera feeds with some facial recognition information.
 <br/><br/>
 
+**The 'run()' function:**
+
+To use PiFaceCam, you call the run() function. This run() function is a blocking function. It will only return when the run process terminates. This can only happen the shutdown pin is triggered or when an exception has occurred. It will then returns an integer that indicates the reason for the return. More details can be found in the log file or the output to the terminal.
+<br/>
+
+|Returned integer|Description|
+|:--:|:--|
+|1|Shutdown pin triggered.|
+|2|Error encountered while reading USB camera.|
+|3|USB camera is required but none detected.|
+|4|Error encountered while reading Picamera.|
+|5|Picamera is required but none detected.|
+|6|Error encountered while processing embedding.|
+|7|Error encountered in callback function.|
+|8|Error encountered while setting up video streaming server.|
+|9|Error encountered while setting up status/shutdown gpios.|
+|10|Error encountered while setting up verification server.|
+
+
 **Parameters:**
 
-The run() function can receive many parameters. Description of each parameter are listed below.<br/>
+The run() function can receive many parameters. Description of each parameter are listed below.
+<br/>
 
 |Parameter|Type|Default Value|Description|
 |:--:|:--|:--|:--|
@@ -84,8 +104,8 @@ The run() function can receive many parameters. Description of each parameter ar
 |stereo_left_cam_type|String|"USB"|Left camera type for stereo setup. Available options are  "PICAM" and "USB".|
 |stereo_right_cam_type|String|"PICAM"|Right camera type for stereo setup. Available options are  "PICAM" and "USB".|
 |detect_conf_percent|Int/Float|95.0|Minimum confident percentage required to identify a person.|
-|status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 and different from shutdown_pin_num.|
-|shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 and different from status_pin_num.|
+|status_pin_num|Int|19|GPIO pin number to use as output for status LED. Value has to be between 2 and 27 (or -1 to disable) and different from shutdown_pin_num.|
+|shutdown_pin_num|Int|26|GPIO pin number to use for trigger program exit. Value has to be between 2 and 27 (or -1 to disable) and different from status_pin_num.|
 |full_face_only|Boolean|False|[3]When set to true, will force pifacecam to use whole face for recognition.|
 |high_precision_mode|Boolean|False|When set to true, will use a more accurate model for recogniton.|
 |max_num_for_hp_mode|Int|4|The maximum number of faces to detect each time in high precision mode. Setting a lower number will reduce lagging when there are too many faces to process. Setting a value N will mean only the N most prominent faces will be recognised. This value has to be between 1 and 4. Note: Max face detected is 1 in stereo camera setup.|
@@ -107,6 +127,8 @@ The run() function can receive many parameters. Description of each parameter ar
 |verification_server_token|String|None|[6]If set, will use to validate client's request.|
 |usb_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from USB camera.|
 |picam_cam_zoom_ratio|Int/Float|1.0|Zoom ratio of image from Picamera.|
+|usb_cam_rotation|Int/Float|0|Rotation degree of USB camera. Value can be either 0 or 180|
+|picam_cam_rotation|Int/Float|0|Rotation degree of Picamera. Value can be either 0 or 180|
 <br/>
 
 **Details:**
@@ -317,6 +339,15 @@ within the range of 50 to 125pixels.)
 - Once face ids are created, they are stored as encrypted files (faceids_image_cache.dat & data.dat).You can subsequently choose to remove all images from "faceids_folder_pathname" TOGETHER with the id folders. 
 - To removing a saved face id, you create an empty folder for the face id. PiFaceCam will remove the id when it detect an empty folder for the id during start. To remove all saved ids at once, just delete both faceids_image_cache.dat & data.dat files.<br/><br/>
 
+**Revisions:**<br/>
+1) (ver:1.0.103) - Sept 2020.
+* First release to pypi.org
+
+2) (ver:1.2.002) - July 2021.
+* Add option to disable shutdown and/or status gpios.
+* Run() function to return an integer when shutdown pin is triggered or a fatal error has occurred. The value of the returned integer will also indicate the reason for the return.
+* Add option to rotate camera by 180 degrees.
+* Fixed bug of data_dict["face_confidence_percentage_list"] of callback function not return correct values.<br/><br/>
 
 
 **Terms and conditions:**<br/>
